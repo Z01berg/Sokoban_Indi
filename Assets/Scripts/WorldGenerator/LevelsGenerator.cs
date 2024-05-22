@@ -50,14 +50,6 @@ public class Levels : MonoBehaviour
         EventSystem.CreateNextLevel.AddListener(BuildLevelFromFile);
     }
 
-    private void Update()
-    {
-        // if (build)
-        // {
-        //     BuildLevelFromFile(_finishedLine);
-        // }
-    }
-
     // Builder
     private void BuildLevelFromFile()
     {
@@ -78,9 +70,7 @@ public class Levels : MonoBehaviour
                     case '$':
                         _nameLevel = line.Substring(2);
                         Debug.Log($"Level: {_nameLevel}"); //TODO: UI Stuff?
-                        break;
-                    case '-':
-                        // Empty space
+                        j = line.Length;
                         break;
                     case '*':
                         PaintFloor(_position);
@@ -132,7 +122,7 @@ public class Levels : MonoBehaviour
     }
     
     // Build logic
-    void PaintWall(Vector3Int pos)//TODO:Metoda
+    void PaintWall(Vector3Int pos)//TODO: Metoda która baguje
     {
         _wall.SetTile(pos, Wall);
     }

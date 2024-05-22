@@ -85,6 +85,7 @@ public class BoxController : MonoBehaviour
         {
             EventSystem.ChangeValueTargetRGB.Invoke(-1, _type.ToString());
             _adedTarget = false;
+            CheckTileUnder();
         }
     }
         

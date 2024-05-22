@@ -1,0 +1,4 @@
+repository "Sokoban@YesORNO@cloud"
+  path "/"
+    br "/main"
+    co "/main"

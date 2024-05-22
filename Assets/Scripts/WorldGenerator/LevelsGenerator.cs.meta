@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 51df38d34496f5c4b9dd27120c10de03
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - Floor: {fileID: 11400000, guid: f3065d28377561340be3eb1880afaddc, type: 2}
+  - Wall: {fileID: 11400000, guid: 1ec5d689bbbf3c34991c427d43e6216a, type: 2}
+  - Target_R: {fileID: 11400000, guid: af88f5624558c32458a5a444bd1dce1b, type: 2}
+  - Target_B: {fileID: 11400000, guid: 20dbede1bf3245b45a588f269b8e629c, type: 2}
+  - Target_G: {fileID: 11400000, guid: 173701d0bfebaa24fa642901bea32510, type: 2}
+  - _floor: {instanceID: 0}
+  - _wall: {instanceID: 0}
+  - _tR: {instanceID: 0}
+  - _tB: {instanceID: 0}
+  - _tG: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

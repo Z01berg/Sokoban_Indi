@@ -96,6 +96,7 @@ public class Levels : MonoBehaviour
                         break;
                     case '^':
                         PaintTB(_position);
+                        EventSystem.AddTargetB.Invoke();
                         break;
                     case '7':
                         PaintFloor(_position);
@@ -103,6 +104,7 @@ public class Levels : MonoBehaviour
                         break;
                     case '&':
                         PaintTG(_position);
+                        EventSystem.AddTargetG.Invoke();
                         break;
                     case '/':
                         _finishedLine = i + 1;

@@ -30,7 +30,7 @@ public class Levels : MonoBehaviour
     private int _blueBox = 2;
     private int _greenBox = 3;
 
-    private bool build = false;
+    private bool build;
 
     private void Start()
     {
@@ -88,7 +88,7 @@ public class Levels : MonoBehaviour
                         break;
                     case '%':
                         PaintTR(_position);
-                        EventSystem.AddTargetR.Invoke();
+                        EventSystem.AddTarget.Invoke("R");
                         break;
                     case '6':
                         PaintFloor(_position);
@@ -96,7 +96,7 @@ public class Levels : MonoBehaviour
                         break;
                     case '^':
                         PaintTB(_position);
-                        EventSystem.AddTargetB.Invoke();
+                        EventSystem.AddTarget.Invoke("B");
                         break;
                     case '7':
                         PaintFloor(_position);
@@ -104,7 +104,7 @@ public class Levels : MonoBehaviour
                         break;
                     case '&':
                         PaintTG(_position);
-                        EventSystem.AddTargetG.Invoke();
+                        EventSystem.AddTarget.Invoke("G");
                         break;
                     case '/':
                         _finishedLine = i + 1;

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.Events;
 
 public static class EventSystem
@@ -35,9 +36,7 @@ public static class EventSystem
 
     #region AddTarget*: LevelGenerator.cs -> WorldManager.cs
 
-    public static UnityEvent AddTargetR = new UnityEvent();
-    public static UnityEvent AddTargetB = new UnityEvent();
-    public static UnityEvent AddTargetG = new UnityEvent();
+    public static UnityEvent<String> AddTarget = new UnityEvent<String>();
 
     #endregion
 
@@ -46,5 +45,12 @@ public static class EventSystem
     public static UnityEvent<int, string> ChangeValueTargetRGB = new UnityEvent<int, string>();
 
     #endregion
+    
+    #region ChangeUI: WorldManager.cs -> UIManager
+
+    public static UnityEvent<string, string, string> ChangeUI = new UnityEvent<string, string, string>();
+
+    #endregion
+    
 }
 

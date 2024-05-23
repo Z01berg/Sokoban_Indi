@@ -97,7 +97,6 @@ public class PlayerController : MonoBehaviour, PlayerControlls.IMovementActions
             }
         }
     }
-
     
     private void RotateSprite(Vector2 direction)
     {

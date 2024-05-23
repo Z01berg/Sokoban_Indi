@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum TypeBox
+[HideInInspector] public enum TypeBox
 {
     R,
     B,
@@ -42,23 +42,23 @@ public class BoxController : MonoBehaviour
 
     public bool TryMoveBox(Vector2 direction)
     {
-                Vector3 targetPosition = transform.position + new Vector3(direction.x * _gridSize, direction.y * _gridSize, 0);
+        Vector3 targetPosition = transform.position + new Vector3(direction.x * _gridSize, direction.y * _gridSize, 0);
 
-                Collider2D[] colliders = Physics2D.OverlapBoxAll(targetPosition, new Vector2(_gridSize, _gridSize), 0);
+        Collider2D[] colliders = Physics2D.OverlapBoxAll(targetPosition, new Vector2(_gridSize, _gridSize), 0);
 
-                foreach (Collider2D collider in colliders)
-                {
-                    if (collider.CompareTag("Collision") || (collider.tag.StartsWith("Box") && collider.gameObject != gameObject))
-                    {
-                        Debug.Log("Collision Box");
-                        return false;
-                    }
-                }
+        foreach (Collider2D collider in colliders)
+        {
+            if (collider.CompareTag("Collision") || (collider.tag.StartsWith("Box") && collider.gameObject != gameObject))
+            {
+                Debug.Log("Collision Box");
+                return false;
+            }
+        }
 
-                transform.position += new Vector3(direction.x * _gridSize * 2, direction.y * _gridSize * 2, 0);
+        transform.position += new Vector3(direction.x * _gridSize * 2, direction.y * _gridSize * 2, 0);
                 
-                CheckTileUnder();
-                return true;
+        CheckTileUnder();
+        return true;
     }
 
     private void CheckTileUnder()

@@ -20,7 +20,7 @@ public class Levels : MonoBehaviour
     private Vector3Int _position = new Vector3Int(0,0);
     private int _finishedLine = 0;
     
-    public TextAsset filePath;
+    [HideInInspector] public TextAsset filePath;
     StringReader read;
     string[] lines;
     private string _nameLevel;
@@ -69,7 +69,7 @@ public class Levels : MonoBehaviour
                 {
                     case '$':
                         _nameLevel = $"Level: {line.Substring(2)}";
-                        EventSystem.ChangeUIName.Invoke(_nameLevel);
+                        EventSystem.ChangeUIName.Invoke(_nameLevel);//TODO: GET RARA HIR MAN SHIT
                         j = line.Length;
                         break;
                     case '*':
@@ -88,7 +88,7 @@ public class Levels : MonoBehaviour
                         break;
                     case '%':
                         PaintTR(_position);
-                        EventSystem.AddTarget.Invoke("R");
+                        EventSystem.AddTargetMax.Invoke("R");
                         break;
                     case '6':
                         PaintFloor(_position);
@@ -96,7 +96,7 @@ public class Levels : MonoBehaviour
                         break;
                     case '^':
                         PaintTB(_position);
-                        EventSystem.AddTarget.Invoke("B");
+                        EventSystem.AddTargetMax.Invoke("B");
                         break;
                     case '7':
                         PaintFloor(_position);
@@ -104,7 +104,7 @@ public class Levels : MonoBehaviour
                         break;
                     case '&':
                         PaintTG(_position);
-                        EventSystem.AddTarget.Invoke("G");
+                        EventSystem.AddTargetMax.Invoke("G");
                         break;
                     case '/':
                         _finishedLine = i + 1;

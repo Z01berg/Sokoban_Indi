@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class UILevelNameMAnager : MonoBehaviour
+public class UILevelNameManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _textMeshPro;
     
     void Start()
     {
-    EventSystem.ChangeUIName.AddListener(UpdateText);    
+        EventSystem.ChangeUIName.AddListener(UpdateText);    
     }
 
     private void UpdateText(string name)

@@ -50,7 +50,7 @@ public class WorldManager : MonoBehaviour
         EventSystem.SpawnBox.AddListener(SpawnBox);
         
         // Box Logic
-        EventSystem.AddTarget.AddListener(AddMaxBox);
+        EventSystem.AddTargetMax.AddListener(AddMaxBox);
         
         EventSystem.ChangeValueTargetRGB.AddListener(AddValueToColor);
     }

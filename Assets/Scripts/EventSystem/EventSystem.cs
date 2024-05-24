@@ -34,9 +34,9 @@ public static class EventSystem
 
     #endregion
 
-    #region AddTarget*: LevelGenerator.cs -> WorldManager.cs
+    #region AddTargetMax: LevelGenerator.cs -> WorldManager.cs
 
-    public static UnityEvent<String> AddTarget = new UnityEvent<String>();
+    public static UnityEvent<String> AddTargetMax = new UnityEvent<String>();
 
     #endregion
 
@@ -46,15 +46,21 @@ public static class EventSystem
 
     #endregion
     
-    #region ChangeUI: WorldManager.cs -> UITargetManager
+    #region ChangeUITarget: WorldManager.cs -> UITargetManager
 
     public static UnityEvent<string, string, string> ChangeUITarget = new UnityEvent<string, string, string>();
 
     #endregion
     
-    #region ChangeUI: WorldManager.cs -> UILevelNameManager
+    #region ChangeUIName: WorldManager.cs -> UILevelNameManager
 
     public static UnityEvent<string> ChangeUIName = new UnityEvent<string>();
+
+    #endregion
+    
+    #region ChangeUIHistory: WorldManager.cs -> UITargetManager
+
+    public static UnityEvent<Vector3, bool> ChangeUIHistory = new UnityEvent<Vector3, bool>();
 
     #endregion
 }

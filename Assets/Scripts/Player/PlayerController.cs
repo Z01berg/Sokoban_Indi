@@ -10,8 +10,8 @@ public class PlayerController : MonoBehaviour, PlayerControlls.IMovementActions,
     [SerializeField] private GameObject _player;
     private float _gridSize = 0.5f;
     
-    private Stack<Vector3> _moveHistory = new Stack<Vector3>();
-    private Stack<Vector3> _undoHistory = new Stack<Vector3>();
+    private Stack<Vector3> _moveHistoryPlayer = new Stack<Vector3>();
+    private Stack<Vector3> _undoHistoryPlayer = new Stack<Vector3>();
     
     private PlayerControlls _controls;
     private SpriteRenderer _spriteRenderer;
@@ -128,9 +128,10 @@ public class PlayerController : MonoBehaviour, PlayerControlls.IMovementActions,
         
             if (canMove)
             {
-                _moveHistory.Push(transform.position);
+                _moveHistoryPlayer.Push(transform.position);
                 transform.position += new Vector3(direction.x * _gridSize * 2, direction.y * _gridSize * 2, 0);;
-                _undoHistory.Clear();
+                EventSystem.ChangeUIHistory.Invoke(new Vector3(direction.x, direction.y, 0), false);
+                _undoHistoryPlayer.Clear();
             }
         }
     }
@@ -165,11 +166,13 @@ public class PlayerController : MonoBehaviour, PlayerControlls.IMovementActions,
     
     private void UndoMove()
     {
-        if (_moveHistory.Count > 0)
+        if (_moveHistoryPlayer.Count > 0)
         {
             Vector3 previousPosition = transform.position;
-            _undoHistory.Push(previousPosition);
-            transform.position = _moveHistory.Pop();
+            _undoHistoryPlayer.Push(previousPosition);
+            transform.position = _moveHistoryPlayer.Pop();
+            
+            EventSystem.ChangeUIHistory.Invoke(transform.position, true);
         
             Vector2 direction = (transform.position - previousPosition).normalized * -1;
             RotateSprite(direction);
@@ -178,11 +181,13 @@ public class PlayerController : MonoBehaviour, PlayerControlls.IMovementActions,
 
     private void RedoMove()
     {
-        if (_undoHistory.Count > 0)
+        if (_undoHistoryPlayer.Count > 0)
         {
             Vector3 previousPosition = transform.position;
-            _moveHistory.Push(previousPosition);
-            transform.position = _undoHistory.Pop();
+            _moveHistoryPlayer.Push(previousPosition);
+            transform.position = _undoHistoryPlayer.Pop();
+            
+            EventSystem.ChangeUIHistory.Invoke(transform.position, false);
         
             Vector2 direction = (transform.position - previousPosition).normalized;
             RotateSprite(direction);
@@ -194,6 +199,10 @@ public class PlayerController : MonoBehaviour, PlayerControlls.IMovementActions,
     {
         _controls.Movement.Disable();
         _controls.HistoryStack.Disable();
+        
+        _moveHistoryPlayer.Clear();
+        _undoHistoryPlayer.Clear();
+        
         Destroy(_player);
     }
 }

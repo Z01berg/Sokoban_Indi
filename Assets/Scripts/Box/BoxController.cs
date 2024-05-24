@@ -14,6 +14,10 @@ public class BoxController : MonoBehaviour
 {
     [SerializeField] private GameObject _box;
     [SerializeField] private TypeBox _type;
+    
+    private Stack<Vector3> _moveHistoryBox = new Stack<Vector3>();
+    private Stack<Vector3> _undoHistoryBox = new Stack<Vector3>();
+    
     private bool _adedTarget = false;
 
     private float _gridSize = 0.5f;
@@ -88,6 +92,7 @@ public class BoxController : MonoBehaviour
             CheckTileUnder();
         }
     }
+    
         
         
         

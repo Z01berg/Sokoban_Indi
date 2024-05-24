@@ -118,18 +118,18 @@ public class WorldManager : MonoBehaviour
         if (target.StartsWith("R"))
         {
             _targetRedInWorld++;
-            EventSystem.ChangeUI.Invoke("x", _targetRedInWorld.ToString(), "R");
+            EventSystem.ChangeUITarget.Invoke("x", _targetRedInWorld.ToString(), "R");
         }
         else if (target.StartsWith("B"))
         {
             _targetBlueInWorld++;
-            EventSystem.ChangeUI.Invoke("x", _targetBlueInWorld.ToString(), "B");
+            EventSystem.ChangeUITarget.Invoke("x", _targetBlueInWorld.ToString(), "B");
         }
         else
         {
             _targetGreenInWorld++;
             
-            EventSystem.ChangeUI.Invoke("x", _targetGreenInWorld.ToString(), "G");
+            EventSystem.ChangeUITarget.Invoke("x", _targetGreenInWorld.ToString(), "G");
         }
         
     }
@@ -139,17 +139,17 @@ public class WorldManager : MonoBehaviour
         if (flag == "R")
         {
             _targetRed += change;
-            EventSystem.ChangeUI.Invoke(_targetRed.ToString(), "x", flag);
+            EventSystem.ChangeUITarget.Invoke(_targetRed.ToString(), "x", flag);
         }
         else if (flag == "G")
         {
             _targetGreen += change;
-            EventSystem.ChangeUI.Invoke(_targetGreen.ToString(), "x", flag);
+            EventSystem.ChangeUITarget.Invoke(_targetGreen.ToString(), "x", flag);
         }
         else
         {
             _targetBlue += change;
-            EventSystem.ChangeUI.Invoke(_targetBlue.ToString(), "x", flag);
+            EventSystem.ChangeUITarget.Invoke(_targetBlue.ToString(), "x", flag);
         }
     }
 
@@ -182,8 +182,8 @@ public class WorldManager : MonoBehaviour
         _targetGreenInWorld = 0;
         _targetRedInWorld = 0;
         
-        EventSystem.ChangeUI.Invoke("0", "0", "R");
-        EventSystem.ChangeUI.Invoke("0", "0", "B");
-        EventSystem.ChangeUI.Invoke("0", "0", "G");
+        EventSystem.ChangeUITarget.Invoke("0", "0", "R");
+        EventSystem.ChangeUITarget.Invoke("0", "0", "B");
+        EventSystem.ChangeUITarget.Invoke("0", "0", "G");
     }
 }

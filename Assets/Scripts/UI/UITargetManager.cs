@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 
-public class UIManager : MonoBehaviour
+public class UITargetManager : MonoBehaviour
 {
     [SerializeField] private string _flag;
     [SerializeField] private TextMeshProUGUI _textMeshPro;
@@ -15,7 +15,7 @@ public class UIManager : MonoBehaviour
     
     void Start()
     {
-        EventSystem.ChangeUI.AddListener(ChangeUI);
+        EventSystem.ChangeUITarget.AddListener(ChangeUI);
     }
 
     private void ChangeUI(string current, string max, string flag)

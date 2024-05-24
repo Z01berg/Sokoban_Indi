@@ -46,11 +46,16 @@ public static class EventSystem
 
     #endregion
     
-    #region ChangeUI: WorldManager.cs -> UIManager
+    #region ChangeUI: WorldManager.cs -> UITargetManager
 
-    public static UnityEvent<string, string, string> ChangeUI = new UnityEvent<string, string, string>();
+    public static UnityEvent<string, string, string> ChangeUITarget = new UnityEvent<string, string, string>();
 
     #endregion
     
+    #region ChangeUI: WorldManager.cs -> UILevelNameManager
+
+    public static UnityEvent<string> ChangeUIName = new UnityEvent<string>();
+
+    #endregion
 }
 

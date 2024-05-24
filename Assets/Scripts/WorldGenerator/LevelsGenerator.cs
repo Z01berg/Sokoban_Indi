@@ -68,8 +68,8 @@ public class Levels : MonoBehaviour
                 switch (symbol)
                 {
                     case '$':
-                        _nameLevel = line.Substring(2);
-                        Debug.Log($"Level: {_nameLevel}"); //TODO: UI Stuff?
+                        _nameLevel = $"Level: {line.Substring(2)}";
+                        EventSystem.ChangeUIName.Invoke(_nameLevel);
                         j = line.Length;
                         break;
                     case '*':

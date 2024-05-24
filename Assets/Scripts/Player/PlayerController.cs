@@ -5,10 +5,13 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour, PlayerControlls.IMovementActions
+public class PlayerController : MonoBehaviour, PlayerControlls.IMovementActions, PlayerControlls.IHistoryStackActions
 {
     [SerializeField] private GameObject _player;
     private float _gridSize = 0.5f;
+    
+    private Stack<Vector3> _moveHistory = new Stack<Vector3>();
+    private Stack<Vector3> _undoHistory = new Stack<Vector3>();
     
     private PlayerControlls _controls;
     private SpriteRenderer _spriteRenderer;
@@ -23,9 +26,37 @@ public class PlayerController : MonoBehaviour, PlayerControlls.IMovementActions
     private void PrepareInputSystem()
     {
         _controls = new PlayerControlls();
+        
         _controls.Movement.SetCallbacks(this);
         _controls.Movement.Enable();
+        
+        _controls.HistoryStack.SetCallbacks(this);
+        _controls.HistoryStack.Enable();
     }
+
+    #region Init Player Controls
+
+    #region History
+
+    public void OnUndo(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            UndoMove();
+        }
+    }
+    
+    public void OnRedo(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            RedoMove();
+        }
+    }
+
+    #endregion
+
+    #region Movement
 
     public void OnUp(InputAction.CallbackContext context)
     {
@@ -63,6 +94,10 @@ public class PlayerController : MonoBehaviour, PlayerControlls.IMovementActions
         }
     }
 
+    #endregion
+    
+    #endregion
+
     private void Move(Vector2 direction)
     {
         if (Mathf.Abs(direction.x) == 1f || Mathf.Abs(direction.y) == 1f)//TODO: może Debug.Break
@@ -93,7 +128,9 @@ public class PlayerController : MonoBehaviour, PlayerControlls.IMovementActions
         
             if (canMove)
             {
+                _moveHistory.Push(transform.position);
                 transform.position += new Vector3(direction.x * _gridSize * 2, direction.y * _gridSize * 2, 0);;
+                _undoHistory.Clear();
             }
         }
     }
@@ -126,10 +163,37 @@ public class PlayerController : MonoBehaviour, PlayerControlls.IMovementActions
             }
     }
     
+    private void UndoMove()
+    {
+        if (_moveHistory.Count > 0)
+        {
+            Vector3 previousPosition = transform.position;
+            _undoHistory.Push(previousPosition);
+            transform.position = _moveHistory.Pop();
+        
+            Vector2 direction = (transform.position - previousPosition).normalized * -1;
+            RotateSprite(direction);
+        }
+    }
+
+    private void RedoMove()
+    {
+        if (_undoHistory.Count > 0)
+        {
+            Vector3 previousPosition = transform.position;
+            _moveHistory.Push(previousPosition);
+            transform.position = _undoHistory.Pop();
+        
+            Vector2 direction = (transform.position - previousPosition).normalized;
+            RotateSprite(direction);
+        }
+    }
+    
     // World Logic
     private void DeletePlayer()
     {
         _controls.Movement.Disable();
+        _controls.HistoryStack.Disable();
         Destroy(_player);
     }
 }

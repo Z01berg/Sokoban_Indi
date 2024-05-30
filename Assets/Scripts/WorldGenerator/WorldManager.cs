@@ -182,6 +182,8 @@ public class WorldManager : MonoBehaviour
         _targetGreenInWorld = 0;
         _targetRedInWorld = 0;
         
+        EventSystem.ClearUIHistory.Invoke();
+        
         EventSystem.ChangeUITarget.Invoke("0", "0", "R");
         EventSystem.ChangeUITarget.Invoke("0", "0", "B");
         EventSystem.ChangeUITarget.Invoke("0", "0", "G");

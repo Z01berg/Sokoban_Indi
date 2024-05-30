@@ -19,6 +19,7 @@ public class BoxController : MonoBehaviour
     private Stack<Vector3> _undoHistoryBox = new Stack<Vector3>();
     
     private bool _adedTarget = false;
+    private bool _foundMatchingTile = false;
 
     private float _gridSize = 0.5f;
 
@@ -58,43 +59,53 @@ public class BoxController : MonoBehaviour
                 return false;
             }
         }
-
+        Debug.Log($"BoxMOVE ▓ Current: {transform.position} ▓ Target:{targetPosition}");
         transform.position += new Vector3(direction.x * _gridSize * 2, direction.y * _gridSize * 2, 0);
+        Debug.Log($"BoxMOVE_AFTER ▓ Current: {transform.position}");
                 
-        CheckTileUnder();
+        CheckTileUnder(targetPosition);
         return true;
     }
 
-    private void CheckTileUnder()
+    private void CheckTileUnder(Vector3 previousCheck)
     {
-        Collider2D[] currentTileColliders = Physics2D.OverlapBoxAll(new Vector2(transform.position.x - _gridSize / 2, transform.position.y - _gridSize / 2), new Vector2(_gridSize, _gridSize), 0);
-        bool foundMatchingTile = false;
+        Vector2 checkSize = new Vector2(_gridSize / 2, _gridSize / 2);
+        Collider2D[] currentTileColliders = Physics2D.OverlapBoxAll(previousCheck, checkSize, 0);
+        Debug.Log($"BoxUNDER_CHECK ▓ Current: {previousCheck} ▓ Target:{checkSize}");
+
+        bool needAdditionalCheck = false; // Flag to indicate if an additional check is needed
+
         foreach (Collider2D collider in currentTileColliders)
         {
             Debug.Log("Checking tile: " + collider.tag);
             if (collider.tag.EndsWith(_type.ToString()))
             {
-                if (!_adedTarget && !foundMatchingTile)
+                _foundMatchingTile = true;
+                if (!_adedTarget)
                 {
                     Debug.Log("Box on matching tile: " + collider.tag);
                     EventSystem.ChangeValueTargetRGB.Invoke(1, _type.ToString());
                     _adedTarget = true;
-                    foundMatchingTile = true;
-                    break;
+                }
+                else
+                {
+                    needAdditionalCheck = true;
                 }
             }
         }
 
-        if (!foundMatchingTile && _adedTarget)
+        if (!_foundMatchingTile && _adedTarget)
         {
             EventSystem.ChangeValueTargetRGB.Invoke(-1, _type.ToString());
             _adedTarget = false;
-            CheckTileUnder();
+        }
+
+        if (needAdditionalCheck)
+        {
+            CheckTileUnder(previousCheck);
         }
     }
-    
-        
-        
+
         
         private void DeleteBox()
         {

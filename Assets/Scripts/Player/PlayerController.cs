@@ -103,6 +103,7 @@ public class PlayerController : MonoBehaviour, PlayerControlls.IMovementActions,
         if (Mathf.Abs(direction.x) == 1f || Mathf.Abs(direction.y) == 1f)//TODO: może Debug.Break
         {
             Vector3 targetPosition = transform.position + new Vector3(direction.x * _gridSize, direction.y * _gridSize, 0);
+            Debug.Log($"PLAYER ▓ Current: {transform.position} ▓ Target:{targetPosition}");
         
             Collider2D[] colliders = Physics2D.OverlapBoxAll(targetPosition, new Vector2(_gridSize, _gridSize), 0);
         
@@ -209,7 +210,6 @@ public class PlayerController : MonoBehaviour, PlayerControlls.IMovementActions,
     // World Logic
     private void DeletePlayer()
     {
-        EventSystem.ClearUIHistory.Invoke();
         DisableInputSystem();
         
         ClearHistoryStack();

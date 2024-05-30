@@ -54,6 +54,7 @@ public class Levels : MonoBehaviour
     // Builder
     private void BuildLevelFromFile()
     {
+        //TODO: Introduce Screen
         _position.y = lines.Length - 1 - _finishedLine;
         
         bool shouldExit = false; 
@@ -84,7 +85,7 @@ public class Levels : MonoBehaviour
                         }
                         else
                         {
-                            _record = $"R: -";
+                            _record = $"R: -";//TODO:Record saver
                         }
                         
                         EventSystem.ChangeUIName.Invoke(_nameLevel, _record);
@@ -138,7 +139,7 @@ public class Levels : MonoBehaviour
         }
 
         _position = new Vector3Int(0, 0);
-        build = false;
+        build = false;//TODO: Outro with Record
     }
     
     // Build logic

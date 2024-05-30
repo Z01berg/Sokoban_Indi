@@ -193,15 +193,26 @@ public class PlayerController : MonoBehaviour, PlayerControlls.IMovementActions,
             RotateSprite(direction);
         }
     }
+
+    private void ClearHistoryStack()
+    {
+        _moveHistoryPlayer.Clear();
+        _undoHistoryPlayer.Clear();
+    }
+
+    private void DisableInputSystem()
+    {
+        _controls.Movement.Disable();
+        _controls.HistoryStack.Disable();
+    }
     
     // World Logic
     private void DeletePlayer()
     {
-        _controls.Movement.Disable();
-        _controls.HistoryStack.Disable();
+        EventSystem.ClearUIHistory.Invoke();
+        DisableInputSystem();
         
-        _moveHistoryPlayer.Clear();
-        _undoHistoryPlayer.Clear();
+        ClearHistoryStack();
         
         Destroy(_player);
     }

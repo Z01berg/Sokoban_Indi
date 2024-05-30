@@ -24,6 +24,7 @@ public class Levels : MonoBehaviour
     StringReader read;
     string[] lines;
     private string _nameLevel;
+    private string _record;
 
     // variables
     private int _redBox = 1;
@@ -69,7 +70,24 @@ public class Levels : MonoBehaviour
                 {
                     case '$':
                         _nameLevel = $"Level: {line.Substring(2)}";
-                        EventSystem.ChangeUIName.Invoke(_nameLevel);//TODO: GET RARA HIR MAN SHIT
+                        
+                        line = lines[i+1];
+                        symbol = line[j+1];
+                        
+                        if (line[0] == '$')
+                        {
+                            _record = $"R: {line.Substring(3)}";
+                        
+                            EventSystem.ChangeUIName.Invoke(_nameLevel, _record);
+                            i++;
+                            j = line.Length;
+                        }
+                        else
+                        {
+                            _record = $"R: -";
+                        }
+                        
+                        EventSystem.ChangeUIName.Invoke(_nameLevel, _record);
                         j = line.Length;
                         break;
                     case '*':
@@ -124,7 +142,8 @@ public class Levels : MonoBehaviour
     }
     
     // Build logic
-    void PaintWall(Vector3Int pos)//TODO: Metoda która baguje
+    //TODO: Metody które bagują
+    void PaintWall(Vector3Int pos)
     {
         _wall.SetTile(pos, Wall);
     }

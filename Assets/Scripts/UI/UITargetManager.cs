@@ -13,7 +13,7 @@ public class UITargetManager : MonoBehaviour
     private string _current = "0";
     
     
-    void Start()
+    void Awake()
     {
         EventSystem.ChangeUITarget.AddListener(ChangeUI);
     }

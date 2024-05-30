@@ -46,21 +46,27 @@ public static class EventSystem
 
     #endregion
     
-    #region ChangeUITarget: WorldManager.cs -> UITargetManager
+    #region ChangeUITarget: WorldManager.cs -> UITargetManager.cs
 
     public static UnityEvent<string, string, string> ChangeUITarget = new UnityEvent<string, string, string>();
 
     #endregion
     
-    #region ChangeUIName: WorldManager.cs -> UILevelNameManager
+    #region ChangeUIName: WorldManager.cs -> UILevelNameManager.cs
 
-    public static UnityEvent<string> ChangeUIName = new UnityEvent<string>();
+    public static UnityEvent<string, string> ChangeUIName = new UnityEvent<string, string>();
 
     #endregion
     
     #region ChangeUIHistory: WorldManager.cs -> UITargetManager
 
     public static UnityEvent<Vector3, bool> ChangeUIHistory = new UnityEvent<Vector3, bool>();
+
+    #endregion
+    
+    #region ClearUIHistory: PlayerController.cs -> UIHistoryManager.cs
+
+    public static UnityEvent ClearUIHistory = new UnityEvent();
 
     #endregion
 }

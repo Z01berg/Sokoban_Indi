@@ -35,7 +35,7 @@ public class WorldManager : MonoBehaviour
     
     #endregion
         
-    void Start()//TODO: Transform History Player && Box
+    void Awake()//TODO: Transform History Player && Box
     {
         InitEvents();
         DoBackupPrefabs();

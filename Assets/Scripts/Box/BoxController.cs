@@ -22,7 +22,7 @@ public class BoxController : MonoBehaviour
 
     private float _gridSize = 0.5f;
 
-    private void Start()
+    private void Awake()
     {
         EventSystem.DeleteBox.AddListener(DeleteBox);
         ResolveWhichBox();

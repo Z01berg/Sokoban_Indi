@@ -17,9 +17,10 @@ public class UIHistoryManager : MonoBehaviour
         { Vector3.down, '▼' }
     };
     
-    void Start()
+    void Awake()
     {
         EventSystem.ChangeUIHistory.AddListener(CheckWhatDo);    
+        EventSystem.ClearUIHistory.AddListener(ClearHistoryMoveUI);
     }
 
     private void CheckWhatDo(Vector3 direction, bool remove)
@@ -35,23 +36,28 @@ public class UIHistoryManager : MonoBehaviour
     }
 
 
-    public void PushMove(Vector3 moveDirection)
+    private void PushMove(Vector3 moveDirection)
     {
         if (_directionSymbols.ContainsKey(moveDirection))
         {
-            //_historyString.Append(_directionSymbols[moveDirection]);//TODO; WTF?
+            //_historyString.Append(_directionSymbols[moveDirection]);//TODO: WTF?
             _historyString += _directionSymbols[moveDirection];
         }
 
         UpdateText(_historyString);
     }
     
-    public void PopMove()
+    private void PopMove()
     {
         
         _historyString = _historyString.Remove(_historyString.Length - 1);
 
         UpdateText(_historyString);
+    }
+
+    private void ClearHistoryMoveUI()
+    {
+        _historyString = "";
     }
     
     private void UpdateText(string name)

@@ -188,9 +188,9 @@ public class PlayerController : MonoBehaviour, PlayerControlls.IMovementActions,
             _moveHistoryPlayer.Push(previousPosition);
             transform.position = _undoHistoryPlayer.Pop();
             
-            EventSystem.ChangeUIHistory.Invoke(transform.position, false);
-        
             Vector2 direction = (transform.position - previousPosition).normalized;
+            EventSystem.ChangeUIHistory.Invoke(direction, false);
+        
             RotateSprite(direction);
         }
     }

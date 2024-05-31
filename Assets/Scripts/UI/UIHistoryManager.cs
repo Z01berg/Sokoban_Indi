@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -8,18 +6,18 @@ public class UIHistoryManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _textMeshPro;
 
-    private string _historyString;
-    private Dictionary<Vector3, char> _directionSymbols = new Dictionary<Vector3, char>()
+    private Stack<string> _historyStack = new Stack<string>();
+    private Dictionary<Vector3, string> _directionSymbols = new Dictionary<Vector3, string>()
     {
-        { Vector3.left, '◄' },
-        { Vector3.right, '►' },
-        { Vector3.up, '▲' },
-        { Vector3.down, '▼' }
+        { Vector3.left, "◄" },
+        { Vector3.right, "►" },
+        { Vector3.up, "▲" },
+        { Vector3.down, "▼" }
     };
-    
-    void Awake()
+
+    private void Awake()
     {
-        EventSystem.ChangeUIHistory.AddListener(CheckWhatDo);    
+        EventSystem.ChangeUIHistory.AddListener(CheckWhatDo);
         EventSystem.ClearUIHistory.AddListener(ClearHistoryMoveUI);
         EventSystem.FlagUIHistory.AddListener(ColorIt);
     }
@@ -36,53 +34,57 @@ public class UIHistoryManager : MonoBehaviour
         }
     }
 
-
     private void PushMove(Vector3 moveDirection)
     {
         if (_directionSymbols.ContainsKey(moveDirection))
         {
-            //_historyString.Append(_directionSymbols[moveDirection]);//TODO: WTF?
-            _historyString += _directionSymbols[moveDirection];
+            string moveSymbol = _directionSymbols[moveDirection];
+            _historyStack.Push(moveSymbol);
         }
 
-        UpdateText(_historyString);
+        UpdateText();
     }
-    
+
     private void PopMove()
     {
-        
-        _historyString = _historyString.Remove(_historyString.Length - 1);
-
-        UpdateText(_historyString);
+        if (_historyStack.Count > 0)
+        {
+            _historyStack.Pop();
+            UpdateText();
+        }
     }
 
     private void ColorIt(string flag)
     {
-        if (flag == "R")
+        if (_historyStack.Count > 0)
         {
-            PopMove();
-            _historyString += "<color=red>" + _historyString[_historyString.Length - 1] + "</color>";
-        }
-        else if (flag == "G")
-        {
-            PopMove();
-            _historyString += "<color=green>" + _historyString[_historyString.Length - 1] + "</color>";
-        }
-        else
-        {
-            PopMove();
-            _historyString += "<color=blue>" + _historyString[_historyString.Length - 1] + "</color>";
+            string lastMove = _historyStack.Pop();
+            switch (flag)
+            {
+                case "R":
+                    _historyStack.Push("<color=red>" + lastMove + "</color>");
+                    break;
+                case "G":
+                    _historyStack.Push("<color=green>" + lastMove + "</color>");
+                    break;
+                default:
+                    _historyStack.Push("<color=blue>" + lastMove + "</color>");
+                    break;
+            }
+            UpdateText();
         }
     }
 
     private void ClearHistoryMoveUI()
     {
-        _historyString = "";
-        UpdateText(_historyString);
+        _historyStack.Clear();
+        UpdateText();
     }
-    
-    private void UpdateText(string name)
+
+    private void UpdateText()
     {
-        _textMeshPro.text = name;
+        string[] historyArray = _historyStack.ToArray();
+        System.Array.Reverse(historyArray);
+        _textMeshPro.text = string.Join("", historyArray);
     }
 }

@@ -70,7 +70,7 @@ public static class EventSystem
 
     #endregion
     
-    #region FlagHistory: BoxController.cs -> UIHistoryManager.cs
+    #region FlagUIHistory: BoxController.cs -> UIHistoryManager.cs
 
     public static UnityEvent<string> FlagUIHistory = new UnityEvent<string>();
 

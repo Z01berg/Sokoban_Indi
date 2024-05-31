@@ -85,6 +85,7 @@ public class BoxController : MonoBehaviour
                 {
                     Debug.Log("Box on matching tile: " + collider.tag);
                     EventSystem.ChangeValueTargetRGB.Invoke(1, _type.ToString());
+                    EventSystem.FlagUIHistory.Invoke(_type.ToString());
                     _adedTarget = true;
                 }
                 else

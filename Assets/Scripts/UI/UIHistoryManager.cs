@@ -21,6 +21,7 @@ public class UIHistoryManager : MonoBehaviour
     {
         EventSystem.ChangeUIHistory.AddListener(CheckWhatDo);    
         EventSystem.ClearUIHistory.AddListener(ClearHistoryMoveUI);
+        EventSystem.FlagUIHistory.AddListener(ColorIt);
     }
 
     private void CheckWhatDo(Vector3 direction, bool remove)
@@ -55,9 +56,29 @@ public class UIHistoryManager : MonoBehaviour
         UpdateText(_historyString);
     }
 
+    private void ColorIt(string flag)
+    {
+        if (flag == "R")
+        {
+            PopMove();
+            _historyString += "<color=red>" + _historyString[_historyString.Length - 1] + "</color>";
+        }
+        else if (flag == "G")
+        {
+            PopMove();
+            _historyString += "<color=green>" + _historyString[_historyString.Length - 1] + "</color>";
+        }
+        else
+        {
+            PopMove();
+            _historyString += "<color=blue>" + _historyString[_historyString.Length - 1] + "</color>";
+        }
+    }
+
     private void ClearHistoryMoveUI()
     {
         _historyString = "";
+        UpdateText(_historyString);
     }
     
     private void UpdateText(string name)

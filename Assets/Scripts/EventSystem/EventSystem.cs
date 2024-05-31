@@ -69,5 +69,12 @@ public static class EventSystem
     public static UnityEvent ClearUIHistory = new UnityEvent();
 
     #endregion
+    
+    #region FlagHistory: BoxController.cs -> UIHistoryManager.cs
+
+    public static UnityEvent<string> FlagUIHistory = new UnityEvent<string>();
+
+    #endregion
+    
 }
 

@@ -134,7 +134,7 @@ public class WorldManager : MonoBehaviour
         
     }
 
-    private void AddValueToColor(int change, string flag)
+    private void AddValueToColor(int change, string flag)//TODO: Już korzystam
     {
         if (flag == "R")
         {

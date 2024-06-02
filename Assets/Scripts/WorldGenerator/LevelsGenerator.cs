@@ -35,7 +35,8 @@ public class Levels : MonoBehaviour
 
     private void Start()
     {
-        filePath = (TextAsset)Resources.Load ("Data/Levels");
+        filePath = new TextAsset(File.ReadAllText(Path.Combine(Application.streamingAssetsPath, "Levels.txt")));
+
         
         if (filePath != null)
         {

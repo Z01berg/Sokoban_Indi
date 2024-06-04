@@ -55,43 +55,41 @@ public class BoxController : MonoBehaviour
         {
             if (collider.CompareTag("Collision") || (collider.tag.StartsWith("Box") && collider.gameObject != gameObject))
             {
-                Debug.Log("Collision Box");
                 return false;
             }
         }
-        Debug.Log($"BoxMOVE ▓ Current: {transform.position} ▓ Target:{targetPosition}");
         transform.position += new Vector3(direction.x * _gridSize * 2, direction.y * _gridSize * 2, 0);
-        Debug.Log($"BoxMOVE_AFTER ▓ Current: {transform.position}");
                 
         CheckTileUnder(targetPosition);
         return true;
     }
 
-    private void CheckTileUnder(Vector3 previousCheck)
-    {
+    private void CheckTileUnder(Vector3 previousCheck)//TODO: FUCK me
+    {   
         Vector2 checkSize = new Vector2(_gridSize / 2, _gridSize / 2);
-        Collider2D[] currentTileColliders = Physics2D.OverlapBoxAll(previousCheck, checkSize, 0);
-        Debug.Log($"BoxUNDER_CHECK ▓ Current: {previousCheck} ▓ Target:{checkSize}");
-
-        bool needAdditionalCheck = false; // Flag to indicate if an additional check is needed
+        Collider2D[] currentTileColliders = Physics2D.OverlapBoxAll(new Vector2(transform.position.x - _gridSize / 2, transform.position.y - _gridSize / 2), new Vector2(_gridSize, _gridSize), 0);
+        
+        bool needAdditionalCheck = false;
 
         foreach (Collider2D collider in currentTileColliders)
         {
-            Debug.Log("Checking tile: " + collider.tag);
+            Debug.Log(collider);
             if (collider.tag.EndsWith(_type.ToString()))
             {
                 _foundMatchingTile = true;
                 if (!_adedTarget)
                 {
-                    Debug.Log("Box on matching tile: " + collider.tag);
                     EventSystem.ChangeValueTargetRGB.Invoke(1, _type.ToString());
                     EventSystem.FlagUIHistory.Invoke(_type.ToString());
                     _adedTarget = true;
                 }
+                /*
                 else
                 {
                     needAdditionalCheck = true;
                 }
+                 */
+                
             }
         }
 
@@ -101,14 +99,17 @@ public class BoxController : MonoBehaviour
             _adedTarget = false;
         }
 
+        if (_foundMatchingTile && !_adedTarget)
+        {
+            EventSystem.ChangeValueTargetRGB.Invoke(+1, _type.ToString());
+            _adedTarget = true;
+        }
+        
         if (needAdditionalCheck)
         {
             CheckTileUnder(previousCheck);
         }
     }
-
-    
-    
         
         private void DeleteBox()
         {

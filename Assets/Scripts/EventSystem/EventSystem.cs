@@ -58,7 +58,7 @@ public static class EventSystem
 
     #endregion
     
-    #region ChangeUIHistory: WorldManager.cs -> UITargetManager
+    #region ChangeUIHistory: WorldManager.cs -> UITargetManager.cs
 
     public static UnityEvent<Vector3, bool> ChangeUIHistory = new UnityEvent<Vector3, bool>();
 

@@ -35,7 +35,7 @@ public class WorldManager : MonoBehaviour
     
     #endregion
         
-    void Awake()//TODO: Transform History Player && Box
+    void Awake()
     {
         InitEvents();
         DoBackupPrefabs();
@@ -65,13 +65,13 @@ public class WorldManager : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.P))//TODO: Debug
+        if (Input.GetKeyDown(KeyCode.P))
         {
             Reset();
             EventSystem.CreateNextLevel.Invoke();
         }
         
-        if (CheckTargets()) //TODO Why still deliting ref?
+        if (CheckTargets())
         {
             Reset();
             EventSystem.CreateNextLevel.Invoke();
@@ -134,7 +134,7 @@ public class WorldManager : MonoBehaviour
         
     }
 
-    private void AddValueToColor(int change, string flag)//TODO: Już korzystam
+    private void AddValueToColor(int change, string flag)
     {
         if (flag == "R")
         {

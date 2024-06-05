@@ -67,7 +67,7 @@ public class BoxController : MonoBehaviour
     private void CheckTileUnder(Vector3 previousCheck)//TODO: FUCK me
     {   
         Vector2 checkSize = new Vector2(_gridSize / 2, _gridSize / 2);
-        Collider2D[] currentTileColliders = Physics2D.OverlapBoxAll(new Vector2(transform.position.x - _gridSize / 2, transform.position.y - _gridSize / 2), new Vector2(_gridSize, _gridSize), 0);
+        Collider2D[] currentTileColliders = Physics2D.OverlapBoxAll(new Vector2(previousCheck.x, previousCheck.y), checkSize, 0);
         
         bool needAdditionalCheck = false;
 
@@ -99,12 +99,6 @@ public class BoxController : MonoBehaviour
             _adedTarget = false;
         }
 
-        if (_foundMatchingTile && !_adedTarget)
-        {
-            EventSystem.ChangeValueTargetRGB.Invoke(+1, _type.ToString());
-            _adedTarget = true;
-        }
-        
         if (needAdditionalCheck)
         {
             CheckTileUnder(previousCheck);

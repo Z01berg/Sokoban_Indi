@@ -44,6 +44,7 @@ $ - Name of level
 ## Example
 ```
 $ Example Name
+$$ Example Record for Level
 -----------########
 -----------#******#
 ############******#

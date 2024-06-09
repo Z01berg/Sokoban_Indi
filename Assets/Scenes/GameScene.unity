@@ -532,6 +532,30 @@ PrefabInstance:
       propertyPath: _textMeshProCount
       value: 
       objectReference: {fileID: 1957732798}
+    - target: {fileID: 7096402673435415452, guid: 5bd4f21a8620e9245b34ad53214c57de, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7096402673435415452, guid: 5bd4f21a8620e9245b34ad53214c57de, type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 1920
+      objectReference: {fileID: 0}
+    - target: {fileID: 7096402673435415452, guid: 5bd4f21a8620e9245b34ad53214c57de, type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 1080
+      objectReference: {fileID: 0}
+    - target: {fileID: 7254704189616411707, guid: 5bd4f21a8620e9245b34ad53214c57de, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7254704189616411707, guid: 5bd4f21a8620e9245b34ad53214c57de, type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 1920
+      objectReference: {fileID: 0}
+    - target: {fileID: 7254704189616411707, guid: 5bd4f21a8620e9245b34ad53214c57de, type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 1080
+      objectReference: {fileID: 0}
     - target: {fileID: 7526656122392075149, guid: 5bd4f21a8620e9245b34ad53214c57de, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.9002087
@@ -575,6 +599,18 @@ PrefabInstance:
     - target: {fileID: 7675140314879094512, guid: 5bd4f21a8620e9245b34ad53214c57de, type: 3}
       propertyPath: m_Name
       value: UI
+      objectReference: {fileID: 0}
+    - target: {fileID: 8805197122309329838, guid: 5bd4f21a8620e9245b34ad53214c57de, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8805197122309329838, guid: 5bd4f21a8620e9245b34ad53214c57de, type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 1920
+      objectReference: {fileID: 0}
+    - target: {fileID: 8805197122309329838, guid: 5bd4f21a8620e9245b34ad53214c57de, type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 1080
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
